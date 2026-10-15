@@ -1,0 +1,688 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, viewport-fit=cover"
+    >
+
+    <meta name="theme-color" content="#2563eb">
+
+    <meta
+        name="description"
+        content="Minha Rotina - organização diária"
+    >
+
+    <meta
+        name="mobile-web-app-capable"
+        content="yes"
+    >
+
+    <meta
+        name="apple-mobile-web-app-capable"
+        content="yes"
+    >
+
+    <title>Minha Rotina</title>
+
+    <link rel="manifest" href="manifest.json">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="telaInicial" class="tela-inicial">
+
+    <div class="hero-logo">
+        <div class="logo-check">✓</div>
+    </div>
+
+    <div class="hero-text">
+        <small>ORGANIZE • FOQUE • EVOLUA</small>
+
+        <h2>Minha Rotina</h2>
+
+        <p>
+            Seu dia mais organizado,
+            um passo de cada vez.
+        </p>
+    </div>
+
+    <div class="hero-beneficios">
+
+        <div>
+            <span>✓</span>
+            Tarefas e hábitos
+        </div>
+
+        <div>
+            <span>✓</span>
+            Metas e progresso
+        </div>
+
+        <div>
+            <span>✓</span>
+            Tudo salvo no seu celular
+        </div>
+
+    </div>
+
+    <button
+        class="btn-comecar"
+        onclick="entrarNoApp()"
+    >
+        Começar minha rotina
+        <span>→</span>
+    </button>
+
+    <small class="versao">
+        Minha Rotina • versão 5
+    </small>
+
+</div>
+
+
+<div
+    id="modalNomeInicial"
+    class="modal nome-inicial"
+>
+
+    <div class="box">
+
+        <button
+            class="x"
+            onclick="fecharNome()"
+        >
+            ×
+        </button>
+
+        <div class="nome-icone">
+            👋
+        </div>
+
+        <h2>Vamos começar?</h2>
+
+        <p>
+            Como podemos chamar você?
+        </p>
+
+        <input
+            id="nomeInicial"
+            placeholder="Digite seu nome"
+        >
+
+        <button
+            class="salvar"
+            onclick="salvarNomeInicial()"
+        >
+            Entrar no aplicativo
+        </button>
+
+    </div>
+
+</div>
+
+
+<div id="appPrincipal">
+
+<header>
+
+    <div>
+
+        <small id="saudacao">
+            Minha rotina 👋
+        </small>
+
+        <h1 id="dataTitulo"></h1>
+
+    </div>
+
+    <button
+        class="perfilBtn"
+        onclick="abrirPerfil()"
+    >
+        👤
+    </button>
+
+</header>
+
+
+<main>
+
+<section class="card">
+
+    <div class="top">
+
+        <h2>Hoje</h2>
+
+        <button onclick="hoje()">
+            Hoje
+        </button>
+
+    </div>
+
+    <div
+        id="semana"
+        class="semana"
+    ></div>
+
+</section>
+
+
+<section class="card">
+
+    <div class="top">
+
+        <span>Progresso do dia</span>
+
+        <strong id="pct">
+            0%
+        </strong>
+
+    </div>
+
+    <div class="barra">
+        <i id="bar"></i>
+    </div>
+
+    <small id="cont">
+        0 de 0 concluídas
+    </small>
+
+</section>
+
+
+<section class="card meta">
+
+    <div>
+
+        <small>
+            🎯 Meta diária
+        </small>
+
+        <strong id="metaTexto">
+            0%
+        </strong>
+
+    </div>
+
+    <div class="metaBar">
+        <i id="metaBar"></i>
+    </div>
+
+    <button onclick="editarMeta()">
+        Editar
+    </button>
+
+</section>
+
+
+<section class="card next">
+
+    ⏰
+
+    <div>
+
+        <small>
+            Próxima tarefa
+        </small>
+
+        <strong id="prox">
+            Nenhuma tarefa
+        </strong>
+
+        <span id="proxHora">
+            --
+        </span>
+
+    </div>
+
+</section>
+
+
+<section>
+
+    <h2>
+        Hábitos do dia
+    </h2>
+
+    <div class="habitos">
+
+        <div class="habito">
+
+            <span>💧</span>
+
+            <b>
+                Água
+            </b>
+
+            <div>
+
+                <button onclick="agua(-1)">
+                    −
+                </button>
+
+                <small id="agua">
+                    0/8 copos
+                </small>
+
+                <button onclick="agua(1)">
+                    +
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="habito"
+            onclick="habito('estudo')"
+        >
+
+            📚
+
+            <b>
+                Estudo
+            </b>
+
+            <small id="estudo">
+                Pendente
+            </small>
+
+        </button>
+
+
+        <button
+            class="habito"
+            onclick="habito('trabalho')"
+        >
+
+            💼
+
+            <b>
+                Trabalho
+            </b>
+
+            <small id="trabalho">
+                Pendente
+            </small>
+
+        </button>
+
+
+        <button
+            class="habito"
+            onclick="habito('treino')"
+        >
+
+            🏋️
+
+            <b>
+                Treino
+            </b>
+
+            <small id="treino">
+                Pendente
+            </small>
+
+        </button>
+
+
+        <button
+            class="habito"
+            onclick="habito('sono')"
+        >
+
+            😴
+
+            <b>
+                Sono
+            </b>
+
+            <small id="sono">
+                Pendente
+            </small>
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<section class="card">
+
+    <h2>
+        Como você está hoje?
+    </h2>
+
+    <div class="humor">
+
+        <button onclick="humor('😞')">
+            😞
+        </button>
+
+        <button onclick="humor('😐')">
+            😐
+        </button>
+
+        <button onclick="humor('🙂')">
+            🙂
+        </button>
+
+        <button onclick="humor('😄')">
+            😄
+        </button>
+
+        <button onclick="humor('🤩')">
+            🤩
+        </button>
+
+    </div>
+
+    <small id="humor"></small>
+
+</section>
+
+
+<section>
+
+    <div class="top">
+
+        <h2>
+            Minhas tarefas
+        </h2>
+
+        <button
+            class="add"
+            onclick="modal(true)"
+        >
+            ＋
+        </button>
+
+    </div>
+
+    <div id="tarefas"></div>
+
+</section>
+
+
+<section class="card">
+
+    <h2>
+        Conquistas 🏆
+    </h2>
+
+    <div
+        id="conquistas"
+        class="conquistas"
+    ></div>
+
+</section>
+
+
+<section class="card">
+
+    <h2>
+        Desempenho 📊
+    </h2>
+
+    <div class="stats">
+
+        <div>
+            🔥
+            <b id="seq">0</b>
+            <small>sequência</small>
+        </div>
+
+        <div>
+            🏆
+            <b id="melhor">0</b>
+            <small>melhor sequência</small>
+        </div>
+
+        <div>
+            ✅
+            <b id="dias">0</b>
+            <small>dias completos</small>
+        </div>
+
+    </div>
+
+    <div
+        class="grafico"
+        id="grafico"
+    ></div>
+
+</section>
+
+
+<section class="card">
+
+    <h2>
+        Ferramentas
+    </h2>
+
+    <button
+        class="backup"
+        onclick="exportar()"
+    >
+        ⬇️ Fazer backup
+    </button>
+
+    <button
+        class="backup"
+        onclick="document.getElementById('import').click()"
+    >
+        ⬆️ Restaurar backup
+    </button>
+
+    <button
+        class="backup"
+        onclick="alternarTema()"
+    >
+        🌙 Modo escuro
+    </button>
+
+    <button
+        class="backup danger"
+        onclick="limpar()"
+    >
+        🗑️ Apagar dados
+    </button>
+
+    <input
+        id="import"
+        hidden
+        type="file"
+        accept=".json"
+        onchange="importar(event)"
+    >
+
+</section>
+
+</main>
+
+
+<div id="m" class="modal">
+
+    <div class="box">
+
+        <button
+            class="x"
+            onclick="modal(false)"
+        >
+            ×
+        </button>
+
+        <h2>
+            Nova tarefa
+        </h2>
+
+        <label>
+            Tarefa
+
+            <input
+                id="nome"
+                placeholder="Ex.: Estudar JavaScript"
+            >
+        </label>
+
+        <label>
+            Horário
+
+            <input
+                id="hora"
+                type="time"
+            >
+        </label>
+
+        <label>
+            Repetir
+
+            <select
+                id="rep"
+                onchange="dias()"
+            >
+
+                <option value="unica">
+                    Uma vez
+                </option>
+
+                <option value="diaria">
+                    Todos os dias
+                </option>
+
+                <option value="segsex">
+                    Segunda a sexta
+                </option>
+
+                <option value="segsab">
+                    Segunda a sábado
+                </option>
+
+                <option value="semanal">
+                    Escolher dias
+                </option>
+
+            </select>
+
+        </label>
+
+        <div
+            id="checks"
+            class="checks"
+        >
+
+            Seg
+            <input type="checkbox" value="1">
+
+            Ter
+            <input type="checkbox" value="2">
+
+            Qua
+            <input type="checkbox" value="3">
+
+            Qui
+            <input type="checkbox" value="4">
+
+            Sex
+            <input type="checkbox" value="5">
+
+            Sáb
+            <input type="checkbox" value="6">
+
+            Dom
+            <input type="checkbox" value="0">
+
+        </div>
+
+        <button
+            class="salvar"
+            onclick="add()"
+        >
+            Adicionar tarefa
+        </button>
+
+    </div>
+
+</div>
+
+
+<div id="perfil" class="modal">
+
+    <div class="box">
+
+        <button
+            class="x"
+            onclick="perfil(false)"
+        >
+            ×
+        </button>
+
+        <h2>
+            Meu perfil 👤
+        </h2>
+
+        <label>
+            Nome
+
+            <input
+                id="nomePerfil"
+                placeholder="Seu nome"
+            >
+        </label>
+
+        <button
+            class="salvar"
+            onclick="salvarPerfil()"
+        >
+            Salvar
+        </button>
+
+    </div>
+
+</div>
+
+
+<script src="script.js"></script>
+
+<script>
+
+if ("serviceWorker" in navigator) {
+
+    window.addEventListener("load", function () {
+
+        navigator.serviceWorker
+            .register("./service-worker.js")
+            .then(function () {
+
+                console.log(
+                    "Service Worker ativado!"
+                );
+
+            })
+            .catch(function (erro) {
+
+                console.error(
+                    "Erro no Service Worker:",
+                    erro
+                );
+
+            });
+
+    });
+
+}
+
+</script>
+
+</div>
+
+</body>
+</html>
